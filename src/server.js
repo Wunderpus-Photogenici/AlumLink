@@ -3,12 +3,19 @@ import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackConfig from '../webpack.config.cjs';
 import webpackHotMiddleware from 'webpack-hot-middleware';
-import interviewRouter from './server/routers/interviewRouter.js'
+import interviewRouter from './server/routers/interviewRouter.js';
+import mongoose from 'mongoose';
 
 // This create the API and connection between server and client
 const app = express();
 const PORT = 3000;
-
+mongoose.connect("mongodb+srv://ezekiel:yUBL2pAsQgIplCNl@alumlink.b1bof5t.mongodb.net/?retryWrites=true&w=majority", {
+  dbName: 'Entry1'
+});
+// this is an event listening to open
+mongoose.connection.once('open', () => {
+  console.log('Connected to Database');
+});
 // handle parsing req body
 app.use(express.json());
 

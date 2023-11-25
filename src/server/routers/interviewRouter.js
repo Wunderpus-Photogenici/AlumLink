@@ -3,15 +3,12 @@ import controller from '../controller.js';
 const router = express.Router();
 
 //interview router
-router.get('/interview', (req, res) => {
-    const messageTemplate = {
-        content: 'This is our content for our inteview message',
-        time: '3:00',
-        username: 'NiceUsername69',
-        likes: 420,
-        messageType: 'interview'
-    } 
-    res.json(messageTemplate);
+router.get('/interview', controller.getPost, (req, res) => {
+    res.status(200).json(res.locals.data);
+})
+
+router.post('/interview', controller.createPost, (req, res) => {
+    res.status(201).json(res.locals.message)
 })
 
 // module.exports = router;
