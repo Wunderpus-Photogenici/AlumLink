@@ -1,13 +1,19 @@
 import React, { useState, useEffect } from 'react';
 
 const Post = (props) => {
-    const { content, time, username, likes, messageType } = props.data;
+    const { title, content, time, username, likes, messageType } = props.data;
     return(
-    <div>
-      <h1 className='post'>This is our post content: {content} </h1>
-      <h1 className='post'>This is our post time: {time} </h1>
+    <div className='post'>
+    <h2 className='postTitle'>Title: {title} </h2>
+      <h3 className='postUsername'>Username: {username} </h3>
+      <div>
+      <h5 className='postContent'>This is our post content: {content} </h5>
+      </div>
+      <h5 className='time'>This is our timestamp {time} </h5>
+      <h5 className='likes'>This is our like count: {likes} </h5>
     </div>
-    )
+      
+    )  
   };
 
 export default Post;
