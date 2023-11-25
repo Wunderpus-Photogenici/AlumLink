@@ -12,7 +12,7 @@ router.post('/post', controller.createPost, (req, res) => {
 });
 
 router.patch('/post', controller.updatePost, (req, res) => {
-    res.status(201).json(res.locals.updatedMessage)
+    res.status(201).json('Updated!')
 });
 
 router.delete('/post', controller.deletePost, (req, res) => {
