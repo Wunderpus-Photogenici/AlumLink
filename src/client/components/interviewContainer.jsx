@@ -6,10 +6,14 @@ import Post from './Post.jsx'
 const InterviewContainer = () => {
     //state
     const [data, setData] = useState({});
+
+    useEffect(() => {
+      dataFetcher();
+     }, [])
     
     //functionality for async, happens once on startup because dependecies array (second param of UseEffect) is empty
     // need useEffect for async
-    useEffect(() => {
+    
         const dataFetcher = async () => {
             try {
             const response = await fetch('/interview');
@@ -19,12 +23,10 @@ const InterviewContainer = () => {
             console.log('Fetch not working- ERROR' + err)
           }
         }
-        dataFetcher();
-    }, [])
+    
     // const { content } = data;
       return(
         <div>
-          <h1>This is a template post:</h1>
           <Post
               data={data}
           />
