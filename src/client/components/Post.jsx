@@ -8,9 +8,8 @@ const Post = (props) => {
     <h2 className='postTitle'>Title: {title} </h2>
       <h6 className='postUsername'>Username: {username} </h6>
       <div>
-      <h5 className='postContent'>This is our post content: {content} </h5>
+      <h5 className='postContent'>Post content</h5>
       </div>
-      <h5 className='time'>This is our timestamp {time} </h5>
       <h5 className='likes'>This is our like count: {likes} </h5>
       <button className='likeButton'>
       <span role="img" aria-label="Thumbs Up">👍</span> 52
