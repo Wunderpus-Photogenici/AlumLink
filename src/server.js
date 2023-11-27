@@ -3,12 +3,19 @@ import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackConfig from '../webpack.config.cjs';
 import webpackHotMiddleware from 'webpack-hot-middleware';
-import interviewRouter from './server/routers/interviewRouter.js'
+import postRouter from './server/routers/postRouter.js';
+import mongoose from 'mongoose';
 
 // This create the API and connection between server and client
 const app = express();
 const PORT = 3000;
-
+mongoose.connect("mongodb+srv://ezekiel:yUBL2pAsQgIplCNl@alumlink.b1bof5t.mongodb.net/?retryWrites=true&w=majority", {
+  dbName: 'Entry1'
+});
+// this is an event listening to open
+mongoose.connection.once('open', () => {
+  console.log('Connected to Database');
+});
 // handle parsing req body
 app.use(express.json());
 
@@ -23,9 +30,9 @@ app.use(webpackHotMiddleware(compiler, {}));
 // router method to create new router
 const userRouter = express.Router();
 // everytime a req comes to root router, use these Routers
-app.use ('/', interviewRouter);
-// app.use ('/jobs', jobRouter);
-// app.use ('/network', networkRouter);
+app.use ('/', postRouter);
+// app.use ('/jobs', postRouter);
+// app.use ('/network', postRouter);
 
 
 //Not found 404
