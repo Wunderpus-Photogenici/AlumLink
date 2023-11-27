@@ -4,10 +4,9 @@ const controller = {}
 
 controller.getPost = async (req, res, next) => {
   try {
-    console.log('id', req.body.id)
-    const data = await Post.find({});
+    const { messageType } = req.params
+    const data = await Post.find({messageType: messageType});
     res.locals.data = data;
-    console.log('This is our getPosts data:',data);
     return next();
   }
   catch(err) {
@@ -40,7 +39,7 @@ controller.updatePost = async (req, res, next) => {
 
 controller.deletePost = async (req, res, next) => {
   try {
-    const { id } = req.body;
+    const { id } = req.params;
     await Post.deleteOne({_id: id})
     return next();
   }

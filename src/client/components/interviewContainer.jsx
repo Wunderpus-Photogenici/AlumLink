@@ -6,7 +6,8 @@ import Post from './Post.jsx'
 const InterviewContainer = () => {
     //state
     const [data, setData] = useState({});
-
+    const [posts, setPosts] = useState(<div></div>)
+    
     useEffect(() => {
       dataFetcher();
      }, [])
@@ -15,23 +16,32 @@ const InterviewContainer = () => {
     // need useEffect for async
     
         const dataFetcher = async () => {
-            try {
-            const response = await fetch('/interview');
+          try {
+            // let body = JSON.stringify({messageType: "interview"})
+            const response = await fetch('/post/interview');
             const data = await response.json();
             setData(data)
+            populator(data);
           } catch(err) {
             console.log('Fetch not working- ERROR' + err)
           }
         }
-    
-    // const { content } = data;
+        
+        const populator = (data) => {
+          const postsArray = [];
+          for (let i = 0; i < data.length; i++){
+            let tempPost = <Post data={data[i]} />
+            postsArray.push(tempPost);
+          };
+          setPosts(postsArray)
+        };
+
+
       return(
         <div>
-          <Post
-              data={data}
-          />
+          {posts}
         </div>
-      );
+      )
     }
 
   export default InterviewContainer;

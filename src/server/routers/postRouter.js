@@ -3,7 +3,7 @@ import controller from '../controller.js';
 const router = express.Router();
 
 //interview router
-router.get('/post', controller.getPost, (req, res) => {
+router.get('/post/:messageType', controller.getPost, (req, res) => {
     res.status(200).json(res.locals.data);
 });
 
@@ -15,7 +15,7 @@ router.patch('/post', controller.updatePost, (req, res) => {
     res.status(201).json('Updated!')
 });
 
-router.delete('/post', controller.deletePost, (req, res) => {
+router.delete('/post/:id', controller.deletePost, (req, res) => {
     res.status(202).json('Deleted!')
 });
 
