@@ -3,21 +3,16 @@ import controller from '../controller.js';
 const router = express.Router();
 
 //interview router
-router.get('/post', controller.getPost, (req, res) => {
-    res.status(200).json(res.locals.data);
-});
-
-router.post('/post', controller.createPost, (req, res) => {
-    res.status(201).json('Success!')
-});
-
-router.patch('/post', controller.updatePost, (req, res) => {
-    res.status(201).json(res.locals.updatedMessage)
-});
-
-router.delete('/post', controller.deletePost, (req, res) => {
-    res.status(202).json('Deleted!')
-});
+router.get('/interview', (req, res) => {
+    const messageTemplate = {
+        content: 'This is our content for our inteview message',
+        time: '3:00',
+        username: 'NiceUsername69',
+        likes: 420,
+        messageType: 'interview'
+    } 
+    res.json(messageTemplate);
+})
 
 // module.exports = router;
 export default router;
