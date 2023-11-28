@@ -31,8 +31,8 @@ app.use(webpackHotMiddleware(compiler, {}));
 const userRouter = express.Router();
 // everytime a req comes to root router, use these Routers
 app.use ('/', postRouter);
-// app.use ('/jobs', postRouter);
-// app.use ('/network', postRouter);
+// app.use ('/post/jobs', postRouter);
+// app.use ('/post/network', postRouter);
 
 
 //Not found 404

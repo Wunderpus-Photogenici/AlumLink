@@ -1,0 +1,49 @@
+.body{
+    background-color: rgb(161, 159, 159);
+}
+
+.title{
+    font-size: 30px;
+    font-family: "Optima", "sans-serif";
+}
+
+.post{
+    border-style: solid;
+    border-radius: 30px;
+    border-width: medium;
+    border-color: blueviolet;
+    background-color: rgb(255, 255, 255);
+    position: relative;
+}
+.postUsername {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 8px;
+    color: #333;
+  }
+.timestamp {
+    position: absolute;
+    font-family: "Optima", "sans-serif";
+    top: 0;
+    right: 0;
+    margin: 5px;
+    color: #888; 
+  }
+  .likeButton {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 10px; 
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    color: #333;
+    transition: color 0.3s;
+  }
+  .likeButton:hover {
+    color: #3498db;
+  }

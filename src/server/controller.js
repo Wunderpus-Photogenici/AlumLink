@@ -4,10 +4,9 @@ const controller = {}
 
 controller.getPost = async (req, res, next) => {
   try {
-    console.log('id', req.body.id)
-    const data = await Post.find({});
+    const { messageType } = req.params
+    const data = await Post.find({messageType: messageType});
     res.locals.data = data;
-    console.log('This is our getPosts data:',data);
     return next();
   }
   catch(err) {
@@ -17,7 +16,7 @@ controller.getPost = async (req, res, next) => {
 
 
 controller.createPost = async (req, res, next) => {
-  const { content } = req.body;
+  console.log('THIS IS OUR REQ BODY', req.body)
   try {
     await Post.create(req.body)
     return next();
@@ -26,10 +25,11 @@ controller.createPost = async (req, res, next) => {
     return next('Error in createPost' + err)
   }
 }
-// update only updates content
+
 controller.updatePost = async (req, res, next) => {
   try {
-    const { content, id} = req.body;
+    console.log('THIS IS UPDATE POST')
+    const { content, id } = req.body;
     const data = await Post.findOneAndUpdate({_id: id}, {content: content}, {new: true});
     return next();
   }
@@ -40,12 +40,28 @@ controller.updatePost = async (req, res, next) => {
 
 controller.deletePost = async (req, res, next) => {
   try {
-    const { id } = req.body;
+    const { id } = req.params;
     await Post.deleteOne({_id: id})
     return next();
   }
   catch(err) {
     return next('Error in deletePost' + err) 
+  }
+}
+
+controller.addLike = async (req, res, next) => {
+  try {
+    console.log('HEELLLLLLOOOOOo')
+    console.log(req.body)
+    let { id, likes } = req.body
+    likes += 1
+    console.log(likes)
+    res.locals.likes = likes
+    await Post.findOneAndUpdate({_id: id}, {likes: likes}, {new: true});
+    return next();
+  }
+  catch (err){
+    return next('Error in addLike in controller.js' + err)
   }
 }
 
