@@ -1,28 +1,30 @@
-import React from 'react';
-const LikePost = ({ postId, onLikePost }) => {
-    const handleLike = () => {
-      onLikePost(postId);
-    };
+import React, { useState } from 'react';
+const LikePost = (props) => {
+  const { likes, id } = props
+  const [likeAmount, setLikes] = useState(likes)
 
-    const handleLikeClick = async () => {
-        try {
-          const response = await fetch('/addLike', {
-            method: 'POST',
-          });
-          const updatedPost = await response.json();
-          console.log('Post liked successfully:', updatedPost);
-        } catch (err) {
-          console.error('ERROR in AddPost HandleSubmit:', err);
-        }
-      };
+  //updates likes amount
+  const handleLikeClick = async () => {
+    try {
+      const response = await fetch('/like', {
+        method: "PATCH",
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({id: id, likes: likeAmount})
+      })
+      const data = await response.json();
+      setLikes(data)
+    } catch (err) {
+      console.error('Error found in handleLikeClick in LikePost.jsx:', err);
+    }
+  };
 
-    return (
-        <div>
-            <button onClick={handleLike}>
-                <span role="img" aria-label="Thumbs Up">👍</span> Like
-            </button>
-        </div>
-    );
+return (
+    <div className="likeButton">
+        <button onClick={handleLikeClick}>
+            <span role="img" aria-label="Thumbs Up">👍  </span>{likeAmount}
+        </button>
+    </div>
+  );
 };
 
 
